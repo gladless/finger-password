@@ -1,0 +1,22 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Finger Password</title>
+</head>
+<body>
+	
+	<div id="_finger_password"></div>
+
+	<script src='./finger.js'></script>
+	<script>
+		var finger = new Finger(
+			{
+				id: '_finger_password'
+			}, 
+			path => {
+				console.log('得到了path', path)
+			}
+		)
+	</script>
+</body>
+</html>

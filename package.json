@@ -1,0 +1,27 @@
+{
+  "name": "finger-password",
+  "version": "1.0.0",
+  "description": "图形密码锁 | 九宫格密码",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glad-less/finger-password.git"
+  },
+  "keywords": [
+    "finger",
+    "password",
+    "graphical",
+    "password",
+    "图形密码",
+    "九宫格密码"
+  ],
+  "author": "gald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glad-less/finger-password/issues"
+  },
+  "homepage": "https://github.com/glad-less/finger-password#readme"
+}
