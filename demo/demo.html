@@ -2,38 +2,71 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Finger Password</title>
+	<style>
+		._control {
+			margin: 30px auto;
+		}
+		._control input {
+			line-height: 24px;
+			margin: 10px 10px;
+		}
+		._control button {
+			display: block;
+			width: 100px;
+			font-size: 24px;
+			margin: 20px auto;
+		}
+	</style>
 </head>
 <body>
 	
 	<div id="_finger_password"></div>
+	<div class="_control">
+		<input type="text" placeholder="宽_默认600" type="number">
+		<input type="text" placeholder="高_默认600" type="number">
+		<input type="text" placeholder="背景色_默认#eee" type="text">
+		<input type="text" placeholder="线条颜色_默认#0089FF" type="text">
+		<input type="text" placeholder="线条粗细_默认3" type="number">
+		<input type="text" placeholder="错误颜色_默认#f56c6c" type="text">
+		<input type="text" placeholder="每行几个点_默认3" type="number">
+		<input type="text" placeholder="每列几个点_默认3" type="number">
+		<button onclick="reset()">试一试</button>
+	</div>
 
 	<script src='./demo.js'></script>
 	<script>
-		var finger = new Finger(
-			{
-				id: '_finger_password', // id 必传
-				width: 600, // 宽
-				height: 600, // 高
-				bgColor: '#fff', // 背景色
-				lineColor: '#0089FF', // 线条颜色
-				lineSize: 3, // 线条粗细
-				errorColor: '#f56c6c', // 错误颜色
-				cols: 3, // 一行有几个点
-				rows: 3, // 一列有几个点
-			}, 
-			path => {
-				console.log('得到了path', path)
-				
-				if ( path ) {
-					setTimeout(() => { // 这里需要设置延时
-						finger.drawResult(path, true) // 展示错误颜色
-					}, 0)
-					setTimeout(() => {
-						finger.reset() // 重置画板
-					}, 1000)
+		window.onload = reset()
+		function reset () {
+			let box = document.querySelector('#_finger_password')
+			box.innerHTML = ''
+
+			let arr = document.querySelectorAll('input')
+			let config = {
+					id: '_finger_password', // id 必传
+					width: arr[0].value || 600, // 宽
+					height: arr[1].value || 600, // 高
+					bgColor: arr[2].value || '#eee', // 背景色
+					lineColor: arr[3].value || '#0089FF', // 线条颜色
+					lineSize: arr[4].value || 3, // 线条粗细
+					errorColor: arr[5].value || '#f56c6c', // 错误颜色
+					cols: arr[6].value || 3, // 一行有几个点
+					rows: arr[7].value || 3, // 一列有几个点
 				}
-			}
-		)
+			let finger = new Finger(config, path => {
+					console.log('路径', path)
+					alert('路径： ' + path)
+					if ( path ) {
+						setTimeout(() => { // 这里需要设置延时
+							finger.drawResult(path, true) // 展示错误颜色
+						}, 0)
+						setTimeout(() => {
+							finger.reset() // 重置画板
+						}, 500)
+					}
+				}
+			)
+		}
+
 	</script>
 </body>
 </html>

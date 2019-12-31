@@ -52,7 +52,7 @@ export default class Finger {
 		canvas.height = this.config.height
 		// 初始化事件监听
 		canvas.addEventListener('mousedown', this.onTouchStart.bind(this))
-		canvas.addEventListener('mousemove', this.onTouchMove.bind(this))
+        canvas.addEventListener('mousemove', this.onTouchMove.bind(this))
 		window.addEventListener('mouseup', this.onTouchEnd.bind(this)) // 如果只监听canvas那么在canvas之外放开鼠标就不起作用了
 		box.appendChild(canvas)
 		return canvas.getContext("2d")
@@ -69,12 +69,13 @@ export default class Finger {
 	initPoints () {
 		let diffX = (this.config.width - (this.config.cols * this.r * 2)) / (this.config.cols - 1) // 列间距
 		let diffY = (this.config.height - (this.config.rows * this.r * 2)) / (this.config.rows - 1) // 行间距
-		let len = this.config.cols * this.config.rows
+        let len = this.config.cols * this.config.rows
+        let cols = this.config.cols
 		let arr = []
 		for (let i = 0; i < len; i++) {
 			let obj = {}
-			obj.x = (i % 3) * (diffX + 2 * this.r) + this.r // x坐标  ==> (i % 3) 为偏离值  ==》 (diffX + 2 * this.r) 为偏离的内容，分别是多少个圆和多少个间隔
-			obj.y = Math.floor(i / 3) * (diffY + 2 * this.r) + this.r
+			obj.x = (i % cols) * (diffX + 2 * this.r) + this.r // x坐标  ==> (i % cols) 为偏离值  ==》 (diffX + 2 * this.r) 为偏离的内容，分别是多少个圆和多少个间隔
+			obj.y = Math.floor(i / cols) * (diffY + 2 * this.r) + this.r
 			obj.r = this.r
 			obj.lineColor = this.config.lineColor
 			obj.errorColor = this.config.errorColor
@@ -83,7 +84,7 @@ export default class Finger {
 			obj.active = false
 			obj.error = false
 			arr.push(obj)
-		}
+        }
 		return arr
 	}
 
@@ -173,7 +174,9 @@ export default class Finger {
 
 	// 手指释放
 	onTouchEnd () {
-        this.callback(this.path)
+        if (this.start) {
+            this.callback(this.path)
+        }
 		this.path = []
         this.reset()
 	}
@@ -185,7 +188,8 @@ export default class Finger {
 			e.active = false
 			e.error = false
 		})
-		this.start = false
+        this.start = false
+        this.path = []
 		this.ctx.clearRect(0, 0, this.config.width, this.config.height)
 		this.drawBG()
 		this.drawPoint()

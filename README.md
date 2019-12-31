@@ -3,6 +3,7 @@ finger-password | graphical password | 图形密码 | 九宫格密码
 
 ![示例](https://github.com/glad-less/finger-password/blob/master/images/finger-password.png)
 
+[在线体验](http://finger.wqnmd.cn/)
 
 ### 用法
 1. 先安装依赖 npm install --save finger-password

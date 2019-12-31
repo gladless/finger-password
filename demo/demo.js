@@ -52,7 +52,7 @@ class Finger {
 		canvas.height = this.config.height
 		// 初始化事件监听
 		canvas.addEventListener('mousedown', this.onTouchStart.bind(this))
-		canvas.addEventListener('mousemove', this.onTouchMove.bind(this))
+        canvas.addEventListener('mousemove', this.onTouchMove.bind(this))
 		window.addEventListener('mouseup', this.onTouchEnd.bind(this)) // 如果只监听canvas那么在canvas之外放开鼠标就不起作用了
 		box.appendChild(canvas)
 		return canvas.getContext("2d")
@@ -85,7 +85,6 @@ class Finger {
 			obj.error = false
 			arr.push(obj)
         }
-        console.log(arr)
 		return arr
 	}
 
@@ -175,7 +174,9 @@ class Finger {
 
 	// 手指释放
 	onTouchEnd () {
-        this.callback(this.path)
+        if (this.start) {
+            this.callback(this.path)
+        }
 		this.path = []
         this.reset()
 	}
@@ -187,7 +188,8 @@ class Finger {
 			e.active = false
 			e.error = false
 		})
-		this.start = false
+        this.start = false
+        this.path = []
 		this.ctx.clearRect(0, 0, this.config.width, this.config.height)
 		this.drawBG()
 		this.drawPoint()
