@@ -28,5 +28,10 @@ finger-password | graphical password | 图形密码 | 九宫格密码
 * 回调中调用drawResult 需要设置延迟 setTimeout(()=>{}, 0), 否则在返回path之后清除画布会清除掉重新画的内容
 
 
+#### 常用方法
+* Finger.drawResult(path:Array<Number>, error:Boolean) // 绘制图形
+* Finger.reset() // 重置界面
+
+
 #### 例子
 项目中的 demo.html 
