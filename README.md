@@ -1,7 +1,7 @@
 # 图形密码  finger-password
 finger-password | graphical password | 图形密码 | 九宫格密码
 
-![示例](http://qiniu.wqnmd.cn/github/finger-password.png)
+![示例](/img/finger-password.png)
 
 
 ### 用法
