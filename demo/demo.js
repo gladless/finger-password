@@ -1,6 +1,6 @@
 
 // 手势密码类
-export default class Finger {
+class Finger {
 
 	// config 基础配置, callback 绘制结束时候的路径数组
 	constructor (Config, callback) {
@@ -69,12 +69,13 @@ export default class Finger {
 	initPoints () {
 		let diffX = (this.config.width - (this.config.cols * this.r * 2)) / (this.config.cols - 1) // 列间距
 		let diffY = (this.config.height - (this.config.rows * this.r * 2)) / (this.config.rows - 1) // 行间距
-		let len = this.config.cols * this.config.rows
+        let len = this.config.cols * this.config.rows
+        let cols = this.config.cols
 		let arr = []
 		for (let i = 0; i < len; i++) {
 			let obj = {}
-			obj.x = (i % 3) * (diffX + 2 * this.r) + this.r // x坐标  ==> (i % 3) 为偏离值  ==》 (diffX + 2 * this.r) 为偏离的内容，分别是多少个圆和多少个间隔
-			obj.y = Math.floor(i / 3) * (diffY + 2 * this.r) + this.r
+			obj.x = (i % cols) * (diffX + 2 * this.r) + this.r // x坐标  ==> (i % cols) 为偏离值  ==》 (diffX + 2 * this.r) 为偏离的内容，分别是多少个圆和多少个间隔
+			obj.y = Math.floor(i / cols) * (diffY + 2 * this.r) + this.r
 			obj.r = this.r
 			obj.lineColor = this.config.lineColor
 			obj.errorColor = this.config.errorColor
@@ -83,7 +84,8 @@ export default class Finger {
 			obj.active = false
 			obj.error = false
 			arr.push(obj)
-		}
+        }
+        console.log(arr)
 		return arr
 	}
 

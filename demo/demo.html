@@ -1,0 +1,39 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Finger Password</title>
+</head>
+<body>
+	
+	<div id="_finger_password"></div>
+
+	<script src='./demo.js'></script>
+	<script>
+		var finger = new Finger(
+			{
+				id: '_finger_password', // id 必传
+				width: 600, // 宽
+				height: 600, // 高
+				bgColor: '#fff', // 背景色
+				lineColor: '#0089FF', // 线条颜色
+				lineSize: 3, // 线条粗细
+				errorColor: '#f56c6c', // 错误颜色
+				cols: 3, // 一行有几个点
+				rows: 3, // 一列有几个点
+			}, 
+			path => {
+				console.log('得到了path', path)
+				
+				if ( path ) {
+					setTimeout(() => { // 这里需要设置延时
+						finger.drawResult(path, true) // 展示错误颜色
+					}, 0)
+					setTimeout(() => {
+						finger.reset() // 重置画板
+					}, 1000)
+				}
+			}
+		)
+	</script>
+</body>
+</html>
