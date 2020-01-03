@@ -136,7 +136,7 @@ class Finger {
 
 	// 被触摸
 	onTouchStart (e) {
-		let index = this.points.findIndex(p => calcL(e.x, e.y, p.x, p.y, p.r))
+		let index = this.points.findIndex(p => calcL(e.offsetX, e.offsetY, p.x, p.y, p.r))
 		if (index > -1) {
 			this.path = [index + 1]
 			this.drawPath(this.path)
@@ -148,20 +148,21 @@ class Finger {
 	// 触摸移动
 	onTouchMove (e) {
 		if (!this.start) return
-		let index = this.points.findIndex(p => calcL(e.x, e.y, p.x, p.y, p.r))
+		let index = this.points.findIndex(p => calcL(e.offsetX, e.offsetY, p.x, p.y, p.r))
 		if (index > -1 && !this.points[index].active) {
 			this.path.push(index + 1)
 		}
 		this.ctx.clearRect(0, 0, this.config.width, this.config.height)
 		// 画及时连线
 		this.drawBG()
-		this.drawLine(e.x, e.y)
+		this.drawLine(e.offsetX, e.offsetY)
 		this.drawPath(this.path)
 		this.drawPoint()
 	}
 
 	// 画及时连线
 	drawLine (toX, toY) {
+		if (!this.path.length) return
 		let index = this.path[this.path.length - 1] - 1
 		let x = this.points[index].x
 		let y = this.points[index].y
